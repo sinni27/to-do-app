@@ -10,5 +10,4 @@ class Task(models.Model):
         return self.task_name
 
 
-#saloni
-#sinniginni
+

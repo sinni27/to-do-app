@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style type="text/css">
+
+   hr {
+     margin-right: 50%;
+
+   }
+   .text {
+     list-style-type: none;
+
+   }
+
+   ul {
+       list-style: none;
+       line-height: 1em;
+       font-size: 3vw;
+   }
+
+   ul li:before {
+       content: "";
+       line-height: 1em;
+       width: .5em;
+       height: .5em;
+       background-color: pink;
+       float: left;
+       margin: .25em .25em 0;
+       border-radius: 50%;
+   }
+   h1{
+     color: orange;
+   }
+    </style>
+  </head>
+  <body>
+    <nav class= 'navbar navbar-default navbar-static-top'>
+        <div class="container">
+
+          <ul class='nav navbar-nav'>
+            <li> <a href="#"class="navbar-brand">My-To-Do-App</a> </li>
+            <!-- <li><a href="#" class='navbar-link'>My To-do-App</a></li> -->
+          </ul>
+        </div>
+    </nav>
+    <div class="container">
+      <hr>
+      {% for all_task in tasks %}
+          <table>
+            <tr>
+            <td width="94%">
+                <h1>
+            <li>
+             {{ all_task.task_name }}
+           </li>
+           </h1>
+         </td>
+         <td >
+
+          <form class="" action="{% url 'to_do_list:task_delete' all_task.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+
+            <input type="hidden" name="task_id" value=" {{ task.id  }}"/>
+            <button type="submit" class="btn btn-default btn-sm" name="button">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </form>
+
+      </td>
+    </tr>
+          </table>
+
+
+
+
+      {% endfor %}
+      <hr>
+
+      <a href="{% url 'to_do_list:add_task' %}">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;
+        Add Task
+
+      </a>
+    </div>
+
+
+  </body>
+</html>
